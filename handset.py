@@ -42,12 +42,12 @@ class RPIK:
                     context=('EN-RPIK').encode()
             )
         self.tek = tek
-        self.cipher = AES.new(self.key, AES.MODE_ECB)
+        self.cipher = AES.new(self.key, AES.MODE_CTR)
 
     def get_proximity_id(self, enin):
         data = ('EN-RPI' + str(enin)).encode()
         enc = self.cipher.encrypt(pad(data, AES.block_size))
-        self.cipher = AES.new(self.key, AES.MODE_ECB)
+        self.cipher = AES.new(self.key, AES.MODE_CTR)
         return enc.hex()
 
     def enumerate_proximity_ids(self):
